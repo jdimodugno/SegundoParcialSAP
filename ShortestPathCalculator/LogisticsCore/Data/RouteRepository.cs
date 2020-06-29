@@ -2,29 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ShortestPathCalculator.Models;
+using LogisticsDomain;
 
-namespace ShortestPathCalculator.Data
+namespace LogisticsCore.Data
 {
-    public class GraphRepository
+    public class RouteRepository : BaseRepository<Route>
     {
-        protected DbSet<Node> _nodes;
         protected DbSet<Path> _paths;
 
-        private AppDBContext Ctx { get; }
-
-        public GraphRepository()
+        public RouteRepository()
         {
-            Ctx = new AppDBContext();
-            _nodes = Ctx.Set<Node>();
-            _paths = Ctx.Set<Path>();
+            _paths = context.Set<Path>();
         }
 
-        public List<Node> GetNodes() => _nodes.ToList();
-
-        public Tuple<string, int, List<Guid>> GetShortestPathFromCombinatory(List<List<Guid>> DestinationsCombinatory)
+        public Route GetShortestRoute(List<List<Guid>> DestinationsCombinatory)
         {
-            List<Tuple<string, int, List<Guid>>> Routes = new List<Tuple<string, int, List<Guid>>>();
+            List<Route> Routes = new List<Route>();
             for (int i = 0; i < DestinationsCombinatory.Count; i++)
             {
                 int PathSegmentsMaximum = DestinationsCombinatory[i].Count;
@@ -37,21 +30,21 @@ namespace ShortestPathCalculator.Data
                 {
                     Guid OriginId = DestinationsCombinatory[i][j];
                     Guid DestinationId = DestinationsCombinatory[i][j + 1];
-                    Path CurrentPath = _paths
+                    Path CurrentSegment = _paths
                         .Where(p => p.OriginId == OriginId && p.DestinationId == DestinationId)
                         .Include(p => p.Origin)
                         .Include(p => p.Destination)
                         .First();
 
 
-                    RouteTotalDistance += CurrentPath.Weight;
-                    Console.WriteLine($"Segment: {CurrentPath.Origin.Name} - {CurrentPath.Destination.Name}");
+                    RouteTotalDistance += CurrentSegment.Weight;
+                    Console.WriteLine($"Segment: {CurrentSegment.Origin.Name} - {CurrentSegment.Destination.Name}");
 
-                    Console.WriteLine($"Segment Distance: {CurrentPath.Weight}");
+                    Console.WriteLine($"Segment Distance: {CurrentSegment.Weight}");
                     Console.WriteLine($"Route Partial Distance: {RouteTotalDistance}");
 
-                    Destinations += $"{CurrentPath.Origin.Name} - ";
-                    if (j == (PathSegmentsMaximum - 2)) Destinations += $"{CurrentPath.Destination.Name}";
+                    Destinations += $"{CurrentSegment.Origin.Name} - ";
+                    if (j == (PathSegmentsMaximum - 2)) Destinations += $"{CurrentSegment.Destination.Name}";
                 }
                 Console.WriteLine("====");
                 Console.WriteLine($"{Destinations}");
@@ -59,10 +52,15 @@ namespace ShortestPathCalculator.Data
                 Console.WriteLine("====");
                 Console.WriteLine("");
 
-                Routes.Add(new Tuple<string, int, List<Guid>>(Destinations, RouteTotalDistance, DestinationsCombinatory[i]));
+                Routes.Add(new Route()
+                {
+                    Detail = Destinations,
+                    Distance = RouteTotalDistance,
+                    NodeIds = DestinationsCombinatory[i],
+                }); ;
             }
 
-            return Routes.Aggregate((r1, r2) => r1.Item2 < r2.Item2 ? r1 : r2);
+            return Routes.Aggregate((r1, r2) => r1.Distance < r2.Distance ? r1 : r2);
         }
     }
 }

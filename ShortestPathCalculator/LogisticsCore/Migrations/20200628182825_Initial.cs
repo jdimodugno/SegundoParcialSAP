@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ShortestPathCalculator.Migrations
+namespace LogisticsCore.Migrations
 {
     public partial class Initial : Migration
     {

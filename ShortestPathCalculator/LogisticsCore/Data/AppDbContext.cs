@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using ShortestPathCalculator.Models;
+using LogisticsDomain;
 
-namespace ShortestPathCalculator.Data
+namespace LogisticsCore.Data
 {
     public class AppDBContext : DbContext
     {
