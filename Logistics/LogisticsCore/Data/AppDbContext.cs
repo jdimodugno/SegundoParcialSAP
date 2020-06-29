@@ -43,7 +43,7 @@ namespace LogisticsCore.Data
 
             modelBuilder.Entity<TransportationVehicle>(vehicle =>
             {
-                vehicle.HasKey(v => v.LicencePlate);
+                vehicle.HasKey(v => v.LicensePlate);
             });
 
             modelBuilder.Entity<Shipping>(shipping =>
@@ -52,13 +52,14 @@ namespace LogisticsCore.Data
                 shipping
                     .HasOne(s => s.TransportationVehicle)
                     .WithMany(v => v.Shippings)
-                    .HasForeignKey(s => s.TransportationVehicleLicencePlate)
+                    .HasForeignKey(s => s.TransportationVehicleLicensePlate)
+                    .IsRequired()
                     .OnDelete(DeleteBehavior.NoAction);
 
                 shipping
                     .HasOne(s => s.Route)
                     .WithMany(v => v.Shippings)
-                    .HasForeignKey(s => s.Id)
+                    .HasForeignKey(s => s.RouteId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 

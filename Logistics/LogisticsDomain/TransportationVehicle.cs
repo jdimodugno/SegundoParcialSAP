@@ -5,7 +5,7 @@ namespace LogisticsDomain
 {
     public class TransportationVehicle
     {
-        public string LicencePlate { get; set; }
+        public string LicensePlate { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
 

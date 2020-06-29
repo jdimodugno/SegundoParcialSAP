@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LogisticsDomain;
+using LogisticsDomain.Enums;
 using Microsoft.EntityFrameworkCore;
 using MoreLinq;
 
@@ -495,28 +496,38 @@ namespace LogisticsCore.Helpers
 
             TransportationVehicle Scania1 = new TransportationVehicle()
             {
-                LicencePlate = "SCANIA_1",
+                LicensePlate = "SCANIA_1",
                 Year = 2000,
                 Model = "Scania G 410"
             };
             TransportationVehicle Scania2 = new TransportationVehicle()
             {
-                LicencePlate = "SCANIA_2",
+                LicensePlate = "SCANIA_2",
                 Year = 2010,
                 Model = "Scania P 320"
             };
             TransportationVehicle Scania3 = new TransportationVehicle()
             {
-                LicencePlate = "SCANIA_3",
+                LicensePlate = "SCANIA_3",
                 Year = 2015,
                 Model = "Scania R 450"
             };
             TransportationVehicle Scania4 = new TransportationVehicle()
             {
-                LicencePlate = "SCANIA_4",
+                LicensePlate = "SCANIA_4",
                 Year = 2017,
                 Model = "Scania R 620"
             };
+
+            List<TransportationVehicle> vehicles = new List<TransportationVehicle>()
+            {
+                Scania1,
+                Scania2,
+                Scania3,
+                Scania4,
+            };
+
+            modelBuilder.Entity<TransportationVehicle>().HasData(vehicles);
 
             List<List<List<Guid>>> Combinations = new List<List<List<Guid>>>() {
                 GenerateCombinatory(LaRioja.Id, new Guid[] { Formosa.Id, CABA.Id, Cordoba.Id, Neuquen.Id }),
@@ -538,6 +549,7 @@ namespace LogisticsCore.Helpers
                     string Destinations = "";
                     int RouteTotalDistance = 0;
 
+                    List<Path> segments = new List<Path>();
                     for (int j = 0; j < PathSegmentsMaximum - 1; j++)
                     {
                         Guid OriginId = DestinationsCombinatory[i][j];
@@ -551,6 +563,8 @@ namespace LogisticsCore.Helpers
                         RouteTotalDistance += CurrentSegment.Weight;
                         Destinations += $"{Origin.IdentifierName} - ";
                         if (j == (PathSegmentsMaximum - 2)) Destinations += $"{Destination.IdentifierName}";
+
+                        segments.Add(CurrentSegment);
                     }
 
                     PossibleRoutes.Add(new Route()
@@ -558,6 +572,7 @@ namespace LogisticsCore.Helpers
                         Detail = Destinations,
                         Distance = RouteTotalDistance,
                         NodeIds = DestinationsCombinatory[i],
+                        Segments = segments,
                     });
                 }
 
@@ -583,6 +598,44 @@ namespace LogisticsCore.Helpers
             }
 
             modelBuilder.Entity<RouteNode>().HasData(routeNodes);
+
+            List<Shipping> shippings = new List<Shipping>();
+
+            Random rnd = new Random();
+            for (int i = 0; i < 40; i++)
+            {
+                Route route = routes[rnd.Next(routes.Count)];
+                bool shouldBeInProgress = i % 10 == 0;
+                ShippingStatus status = shouldBeInProgress ? ShippingStatus.InProgress : (ShippingStatus)Enum.GetValues(typeof(ShippingStatus)).GetValue(rnd.Next(0, 1));
+
+                Shipping shipping = new Shipping
+                {
+                    Id = Guid.NewGuid(),
+                    RouteId = route.Id,
+                    TransportationVehicleLicensePlate = vehicles[(int)Math.Floor((double)(i / 10))].LicensePlate,
+                    Status = (int)status,
+                };
+
+                if (status == ShippingStatus.Scheduled)
+                {
+                    shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(5, 20));
+                }
+                else if (status == ShippingStatus.Completed)
+                {
+                    shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(20, 30) * -1);
+                    shipping.DateCompleted = DateTime.Now.AddDays(rnd.Next(5, 15) * -1);
+                }
+                else
+                {
+                    shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(1, 4) * -1);
+                    shipping.CurrentSegment = route.Segments[rnd.Next(route.Segments.Count)].SegmentIdentifierName;
+                }
+
+                shippings.Add(shipping);
+            }
+
+            modelBuilder.Entity<Shipping>()
+                .HasData(shippings);
         }
 
         private List<List<Guid>> GenerateCombinatory(Guid originNode, Guid[] PossibleDestinations)

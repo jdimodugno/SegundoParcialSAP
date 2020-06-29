@@ -7,10 +7,10 @@ namespace LogisticsDomain.Enums
         [Description("Programado")]
         Scheduled,
 
+        [Description("Completado")]
+        Completed,
+
         [Description("En Progreso")]
         InProgress,
-
-        [Description("Finalizado")]
-        Finished,
     }
 }
