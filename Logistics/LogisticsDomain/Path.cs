@@ -10,5 +10,8 @@ namespace LogisticsDomain
 
         public Guid DestinationId { get; set; }
         public Node Destination { get; set; }
+
+        public string SegmentIdentifierName { get; set; }
+        public string GetSegmentDetail() => $"{Origin.Name} - {Destination.Name}";
     }
 }
