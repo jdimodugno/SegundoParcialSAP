@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogisticsDomain\LogisticsDomain.csproj" />
+    <ProjectReference Include="..\LogisticsCore\LogisticsCore.csproj" />
+  </ItemGroup>
+</Project>

@@ -4,13 +4,15 @@ using LogisticsCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LogisticsCore.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200628182825_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,7 +20,7 @@ namespace LogisticsCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ShortestPathCalculator.Models.Node", b =>
+            modelBuilder.Entity("Logistics.Models.Node", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +76,7 @@ namespace LogisticsCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ShortestPathCalculator.Models.Path", b =>
+            modelBuilder.Entity("Logistics.Models.Path", b =>
                 {
                     b.Property<Guid>("OriginId")
                         .HasColumnType("uniqueidentifier");
@@ -430,15 +432,15 @@ namespace LogisticsCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ShortestPathCalculator.Models.Path", b =>
+            modelBuilder.Entity("Logistics.Models.Path", b =>
                 {
-                    b.HasOne("ShortestPathCalculator.Models.Node", "Destination")
+                    b.HasOne("Logistics.Models.Node", "Destination")
                         .WithMany("PathAsDestination")
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ShortestPathCalculator.Models.Node", "Origin")
+                    b.HasOne("Logistics.Models.Node", "Origin")
                         .WithMany("PathAsOrigin")
                         .HasForeignKey("OriginId")
                         .OnDelete(DeleteBehavior.NoAction)
