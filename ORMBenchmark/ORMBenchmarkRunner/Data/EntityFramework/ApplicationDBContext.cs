@@ -12,7 +12,7 @@ namespace ORMBenchmark.Data.EntityFramework
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost,1433;Database=SegundoParcial;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
+                optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Benchmark;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
             }
         }
 

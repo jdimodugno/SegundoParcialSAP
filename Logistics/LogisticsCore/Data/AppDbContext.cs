@@ -14,7 +14,7 @@ namespace LogisticsCore.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                    .UseSqlServer("Server=localhost,1433;Database=SegundoParcial;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
+                    .UseSqlServer("Server=localhost,1433;Database=Logistica;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
                 optionsBuilder.EnableSensitiveDataLogging();
             }
         }
@@ -28,7 +28,10 @@ namespace LogisticsCore.Data
 
             modelBuilder.Entity<Path>(path =>
             {
-                path.HasKey(n => new { n.OriginId, n.DestinationId });
+                path.HasKey(p => p.Id);
+                path
+                    .HasIndex(p => new { p.OriginId, p.DestinationId })
+                    .IsUnique();
                 path
                     .HasOne(p => p.Origin)
                     .WithMany(n => n.PathAsOrigin)
@@ -54,6 +57,12 @@ namespace LogisticsCore.Data
                     .WithMany(v => v.Shippings)
                     .HasForeignKey(s => s.TransportationVehicleLicensePlate)
                     .IsRequired()
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                shipping
+                    .HasOne(s => s.Route)
+                    .WithMany(v => v.Shippings)
+                    .HasForeignKey(s => s.RouteId)
                     .OnDelete(DeleteBehavior.NoAction);
 
                 shipping

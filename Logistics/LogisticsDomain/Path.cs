@@ -3,6 +3,7 @@ namespace LogisticsDomain
 {
     public class Path
     {
+        public Guid Id { get; set; }
         public int Weight { get; set; }
 
         public Guid OriginId { get; set; }

@@ -1,17 +1,40 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useState, useEffect, useContext } from 'react';
 import { Table, Badge } from 'reactstrap';
-import { fetchVehicleByLicense } from '../../utils/apiCalls';
+import { fetchVehicleByLicense, fetchRouteById } from '../../utils/apiCalls';
 import { GlobalContext } from '../../context/GlobalContext';
 import moment from 'moment';
 import './VehicleShippings.css';
+import Map from '../Map/Map';
 
 const VehicleShippings = ({
   match
 }) => {
-  const { shippingStatuses } = useContext(GlobalContext);
+  const { shippingStatuses, nodesAsObject } = useContext(GlobalContext);
   const [vehicle, setVehicle] = useState(null);
   const [vehicleShippings, setVehicleShippings] = useState(null);
+  const [route, setRoute] = useState(null);
+  const [shippingCurrentSegment, setShippingCurrentSegment] = useState(null);
+  
+  const updateRoute = useCallback(
+    (routeId) => {
+      fetchRouteById(routeId)
+        .then(({ detail, distance, routeNodes }) => {
+          setRoute({
+            detail,
+            distance,
+            nodes: routeNodes
+              .sort((a, b) => a.order - b.order)
+              .map(({ nodeId, order }) => ({ ...nodesAsObject[nodeId], order }))
+          });
+        })
+    }, [nodesAsObject],
+  )
+
+  const getColor = (status) => {
+    if (status === 0) return 'secondary';
+    if (status === 1) return 'success';
+    if (status === 2) return 'info';
+  }
 
   useEffect(() => {
     if (shippingStatuses) {
@@ -30,11 +53,12 @@ const VehicleShippings = ({
             }) => ({
               id,
               dateScheduled,
-              status: shippingStatuses[status],
+              status,
+              statusLabel: shippingStatuses[status],
               routeId,
               dateCompleted,
               currentSegment,
-            }))
+            })).sort((a, b) => new Date(b.dateScheduled) - new Date(a.dateScheduled))
           )
         })
     }
@@ -59,7 +83,7 @@ const VehicleShippings = ({
                 <th>Fecha Programada</th>
                 <th>Fecha Fin</th>
                 <th>Estado</th>
-                <th>Id Ruta</th>
+                <th>Ruta</th>
                 <th>Tramo Actual</th>
               </tr>
             </thead>
@@ -70,6 +94,7 @@ const VehicleShippings = ({
                     id,
                     dateScheduled,
                     status,
+                    statusLabel,
                     dateCompleted,
                     currentSegment,
                     routeId,
@@ -77,13 +102,22 @@ const VehicleShippings = ({
                     <tr key={id}>
                       <td>{ moment(dateScheduled).format('DD/MM/YYYY, h:mm:ss a') }</td>
                       <td>{ dateCompleted ? moment(dateCompleted).format('DD/MM/YYYY, h:mm:ss a') : '' }</td>
-                      <td>{ status }</td>
                       <td>
-                        <Link to={`/route/${routeId}`}>
-                          <Badge>Ver Ruta</Badge>
-                        </Link>
+                        {
+                          <Badge color={getColor(status)}>{ statusLabel }</Badge>
+                        }
                       </td>
-                      <td>{ currentSegment }</td>
+                      <td>
+                        <Badge onClick={() => {
+                          if (currentSegment) {
+                            const originNode = nodesAsObject[currentSegment.originId];
+                            const destinationNode = nodesAsObject[currentSegment.destinationId];
+                            setShippingCurrentSegment([originNode, destinationNode])
+                          } else setShippingCurrentSegment(null);
+                          updateRoute(routeId);
+                        }}>Ver</Badge>
+                      </td>
+                      <td>{ currentSegment ? currentSegment.segmentIdentifierName : '' }</td>
                     </tr>
                   )) : (
                     <tr>
@@ -95,6 +129,18 @@ const VehicleShippings = ({
             </tbody>
           </Table>
         )
+      }
+      {
+        !!route && (
+          <>
+            <h1>{route.detail}</h1>
+            <Map
+              nodes={route.nodes}
+              segment={shippingCurrentSegment}
+              route={true}
+            />
+          </>
+        ) 
       }
     </>
   );

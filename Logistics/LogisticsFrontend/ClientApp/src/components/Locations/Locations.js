@@ -2,11 +2,14 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext'
 import { Table, Spinner } from 'reactstrap';
 import './Locations.css';
+import Map from '../Map/Map';
 
 const Locations = () => {
   const { nodes } = useContext(GlobalContext);
 
-  return (
+  return !nodes ? (
+    <Spinner type="grow" color="primary" /> 
+  ) : (
     <>
       <Table hover>
         <thead>
@@ -34,11 +37,7 @@ const Locations = () => {
           }
         </tbody>
       </Table>
-      {
-        !nodes && (
-          <Spinner type="grow" color="primary" /> 
-        ) 
-      }
+      <Map nodes={nodes} />
     </>
   );
 }

@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using LogisticsDomain.Enums;
 
 namespace LogisticsDomain
 {
@@ -10,5 +12,8 @@ namespace LogisticsDomain
         public int Year { get; set; }
 
         public ICollection<Shipping> Shippings { get; set; }
+
+        [NotMapped]
+        public bool Available { get; set; }
     }
 }

@@ -11,7 +11,8 @@ namespace LogisticsDomain
         public DateTime DateScheduled { get; set; }
         public DateTime? DateCompleted { get; set; }
 
-        public string? CurrentSegment { get; set; }
+        public Guid? CurrentSegmentId { get; set; }
+        public virtual Path? CurrentSegment { get; set; }
 
         public Guid RouteId { get; set; }
         public virtual Route Route { get; set; }

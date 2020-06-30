@@ -12,5 +12,7 @@ namespace LogisticsBusiness.Components
         public List<TransportationVehicle> GetAll() => ((TransportationVehicleRepository)_repository).GetAll();
 
         public TransportationVehicle GetByLicensePlate(string LicensePlate) => ((TransportationVehicleRepository)_repository).GetByLicensePlate(LicensePlate);
+
+        public TransportationVehicle GetAvailableVehicles() => ((TransportationVehicleRepository)_repository).GetAvailableVehicles();
     }
 }

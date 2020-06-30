@@ -16,7 +16,7 @@ namespace ORMBenchmark.Data.Dapper
 
         public DapperRepository()
         {
-            conn = new SqlConnection("Server=localhost,1433;Database=SegundoParcial;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
+            conn = new SqlConnection("Server=localhost,1433;Database=Benchmark;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
         }
 
         public void BulkInsert()

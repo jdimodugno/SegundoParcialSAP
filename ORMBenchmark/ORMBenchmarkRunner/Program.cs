@@ -33,7 +33,7 @@ namespace ORMBenchmarkRunner
 
         static void ResetBookTable()
         {
-            SqlConnection conn = new SqlConnection("Server=localhost,1433;Database=SegundoParcial;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
+            SqlConnection conn = new SqlConnection("Server=localhost,1433;Database=Benchmark;User=sa;Password=cdd4646!;MultipleActiveResultSets=true;");
             string SqlCommand = "DELETE Book; DBCC CHECKIDENT ('Book', RESEED, 0);";
             SqlCommand cmd = new SqlCommand(SqlCommand, conn);
 

@@ -93,6 +93,7 @@ namespace LogisticsCore.Helpers
                 // 1
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 646,
                     OriginId = CABA.Id,
                     DestinationId = Cordoba.Id,
@@ -100,6 +101,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 792,
                     OriginId = CABA.Id,
                     DestinationId = Corrientes.Id,
@@ -107,6 +109,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 933,
                     OriginId = CABA.Id,
                     DestinationId = Formosa.Id,
@@ -114,6 +117,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 53,
                     OriginId = CABA.Id,
                     DestinationId = LaPlata.Id,
@@ -121,6 +125,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 986,
                     OriginId = CABA.Id,
                     DestinationId = LaRioja.Id,
@@ -128,6 +133,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 985,
                     OriginId = CABA.Id,
                     DestinationId = Mendoza.Id,
@@ -135,6 +141,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 989,
                     OriginId = CABA.Id,
                     DestinationId = Neuquen.Id,
@@ -143,6 +150,7 @@ namespace LogisticsCore.Helpers
                 // 2
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 646,
                     OriginId = Cordoba.Id,
                     DestinationId = CABA.Id,
@@ -150,6 +158,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 677,
                     OriginId = Cordoba.Id,
                     DestinationId = Corrientes.Id,
@@ -157,6 +166,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 824,
                     OriginId = Cordoba.Id,
                     DestinationId = Formosa.Id,
@@ -164,6 +174,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 698,
                     OriginId = Cordoba.Id,
                     DestinationId = LaPlata.Id,
@@ -171,6 +182,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 340,
                     OriginId = Cordoba.Id,
                     DestinationId = LaRioja.Id,
@@ -178,6 +190,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 466,
                     OriginId = Cordoba.Id,
                     DestinationId = Mendoza.Id,
@@ -185,6 +198,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 907,
                     OriginId = Cordoba.Id,
                     DestinationId = Neuquen.Id,
@@ -193,6 +207,7 @@ namespace LogisticsCore.Helpers
                 // 3
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 792,
                     OriginId = Corrientes.Id,
                     DestinationId = CABA.Id,
@@ -200,6 +215,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 677,
                     OriginId = Corrientes.Id,
                     DestinationId = Cordoba.Id,
@@ -207,6 +223,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 157,
                     OriginId = Corrientes.Id,
                     DestinationId = Formosa.Id,
@@ -214,6 +231,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 830,
                     OriginId = Corrientes.Id,
                     DestinationId = LaPlata.Id,
@@ -221,6 +239,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 814,
                     OriginId = Corrientes.Id,
                     DestinationId = LaRioja.Id,
@@ -228,6 +247,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1131,
                     OriginId = Corrientes.Id,
                     DestinationId = Mendoza.Id,
@@ -235,6 +255,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1534,
                     OriginId = Corrientes.Id,
                     DestinationId = Neuquen.Id,
@@ -243,6 +264,7 @@ namespace LogisticsCore.Helpers
                 // 4
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 933,
                     OriginId = Formosa.Id,
                     DestinationId = CABA.Id,
@@ -250,6 +272,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 824,
                     OriginId = Formosa.Id,
                     DestinationId = Cordoba.Id,
@@ -257,6 +280,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 157,
                     OriginId = Formosa.Id,
                     DestinationId = Corrientes.Id,
@@ -264,6 +288,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 968,
                     OriginId = Formosa.Id,
                     DestinationId = LaPlata.Id,
@@ -271,6 +296,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 927,
                     OriginId = Formosa.Id,
                     DestinationId = LaRioja.Id,
@@ -278,6 +304,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1269,
                     OriginId = Formosa.Id,
                     DestinationId = Mendoza.Id,
@@ -285,6 +312,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1690,
                     OriginId = Formosa.Id,
                     DestinationId = Neuquen.Id,
@@ -293,6 +321,7 @@ namespace LogisticsCore.Helpers
                 //5
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 53,
                     OriginId = LaPlata.Id,
                     DestinationId = CABA.Id,
@@ -300,6 +329,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 698,
                     OriginId = LaPlata.Id,
                     DestinationId = Cordoba.Id,
@@ -307,6 +337,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 830,
                     OriginId = LaPlata.Id,
                     DestinationId = Corrientes.Id,
@@ -314,6 +345,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 968,
                     OriginId = LaPlata.Id,
                     DestinationId = Formosa.Id,
@@ -321,6 +353,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1038,
                     OriginId = LaPlata.Id,
                     DestinationId = LaRioja.Id,
@@ -328,6 +361,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1029,
                     OriginId = LaPlata.Id,
                     DestinationId = Mendoza.Id,
@@ -335,6 +369,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1005,
                     OriginId = LaPlata.Id,
                     DestinationId = Neuquen.Id,
@@ -343,6 +378,7 @@ namespace LogisticsCore.Helpers
                 //6
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 986,
                     OriginId = LaRioja.Id,
                     DestinationId = CABA.Id,
@@ -350,6 +386,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 340,
                     OriginId = LaRioja.Id,
                     DestinationId = Cordoba.Id,
@@ -357,6 +394,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 814,
                     OriginId = LaRioja.Id,
                     DestinationId = Corrientes.Id,
@@ -364,6 +402,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 927,
                     OriginId = LaRioja.Id,
                     DestinationId = Formosa.Id,
@@ -371,6 +410,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1038,
                     OriginId = LaRioja.Id,
                     DestinationId = LaPlata.Id,
@@ -378,6 +418,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 427,
                     OriginId = LaRioja.Id,
                     DestinationId = Mendoza.Id,
@@ -385,6 +426,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1063,
                     OriginId = LaRioja.Id,
                     DestinationId = Neuquen.Id,
@@ -393,6 +435,7 @@ namespace LogisticsCore.Helpers
                 //7
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 985,
                     OriginId = Mendoza.Id,
                     DestinationId = CABA.Id,
@@ -400,6 +443,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 466,
                     OriginId = Mendoza.Id,
                     DestinationId = Cordoba.Id,
@@ -407,6 +451,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1131,
                     OriginId = Mendoza.Id,
                     DestinationId = Corrientes.Id,
@@ -414,6 +459,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1269,
                     OriginId = Mendoza.Id,
                     DestinationId = Formosa.Id,
@@ -421,6 +467,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1029,
                     OriginId = Mendoza.Id,
                     DestinationId = LaPlata.Id,
@@ -428,6 +475,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 427,
                     OriginId = Mendoza.Id,
                     DestinationId = LaRioja.Id,
@@ -435,6 +483,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 676,
                     OriginId = Mendoza.Id,
                     DestinationId = Neuquen.Id,
@@ -443,6 +492,7 @@ namespace LogisticsCore.Helpers
                 //8
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 989,
                     OriginId = Neuquen.Id,
                     DestinationId = CABA.Id,
@@ -450,6 +500,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 907,
                     OriginId = Neuquen.Id,
                     DestinationId = Cordoba.Id,
@@ -457,6 +508,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1534,
                     OriginId = Neuquen.Id,
                     DestinationId = Corrientes.Id,
@@ -464,6 +516,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1690,
                     OriginId = Neuquen.Id,
                     DestinationId = Formosa.Id,
@@ -471,6 +524,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1005,
                     OriginId = Neuquen.Id,
                     DestinationId = LaPlata.Id,
@@ -478,6 +532,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 1063,
                     OriginId = Neuquen.Id,
                     DestinationId = LaRioja.Id,
@@ -485,6 +540,7 @@ namespace LogisticsCore.Helpers
                 },
                 new Path()
                 {
+                    Id = Guid.NewGuid(),
                     Weight = 676,
                     OriginId = Neuquen.Id,
                     DestinationId = Mendoza.Id,
@@ -605,30 +661,35 @@ namespace LogisticsCore.Helpers
             for (int i = 0; i < 40; i++)
             {
                 Route route = routes[rnd.Next(routes.Count)];
-                bool shouldBeInProgress = i % 10 == 0;
-                ShippingStatus status = shouldBeInProgress ? ShippingStatus.InProgress : (ShippingStatus)Enum.GetValues(typeof(ShippingStatus)).GetValue(rnd.Next(0, 1));
+                int vehicleIndex = (int)Math.Floor((double)(i / 10));
+                bool shouldBeInProgress = i % 9 == 0 && vehicleIndex != 3;
+                bool shouldBeScheduled = i % 10 == 0 && vehicleIndex != 3;
 
                 Shipping shipping = new Shipping
                 {
                     Id = Guid.NewGuid(),
                     RouteId = route.Id,
-                    TransportationVehicleLicensePlate = vehicles[(int)Math.Floor((double)(i / 10))].LicensePlate,
-                    Status = (int)status,
+                    TransportationVehicleLicensePlate = vehicles[vehicleIndex].LicensePlate,
                 };
 
-                if (status == ShippingStatus.Scheduled)
+                if (shouldBeScheduled)
                 {
+                    shipping.Status = (int)ShippingStatus.Scheduled;
                     shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(5, 20));
                 }
-                else if (status == ShippingStatus.Completed)
+                else if (shouldBeInProgress)
                 {
-                    shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(20, 30) * -1);
-                    shipping.DateCompleted = DateTime.Now.AddDays(rnd.Next(5, 15) * -1);
+                    shipping.Status = (int)ShippingStatus.InProgress;
+                    shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(1, 4));
+                    shipping.CurrentSegmentId = route.Segments[rnd.Next(route.Segments.Count)].Id;
                 }
                 else
                 {
-                    shipping.DateScheduled = DateTime.Now.AddDays(rnd.Next(1, 4) * -1);
-                    shipping.CurrentSegment = route.Segments[rnd.Next(route.Segments.Count)].SegmentIdentifierName;
+                    shipping.Status = (int)ShippingStatus.Completed;
+                    int factor = (i % 10) + 1;
+                    DateTime completionDate = DateTime.Now.AddDays(-4 * i);
+                    shipping.DateScheduled = completionDate;
+                    shipping.DateCompleted = completionDate.AddDays(3);
                 }
 
                 shippings.Add(shipping);

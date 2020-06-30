@@ -29,7 +29,10 @@ const RouteMap = ({
     !!route ? (
       <>
         <h1>{route.detail}</h1>
-        <Map nodes={route.nodes} />
+        <Map
+          nodes={route.nodes}
+          route={true}
+        />
       </>
     ) : (
       <p>loading</p>

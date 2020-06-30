@@ -11,6 +11,8 @@ import { fetchNodes, fetchVehicles, fetchShippingStatuses } from './utils/apiCal
 import VehicleShippings from './components/VehicleShippings/VehicleShippings';
 import RouteCalculation from './components/RouteCalculation/RouteCalculation';
 
+import './Global.css'
+
 const App = () => {
   const { loading, setNodes, setVehicles, setShippingStatuses } = useContext(GlobalContext);
 
