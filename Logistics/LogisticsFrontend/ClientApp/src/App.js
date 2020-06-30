@@ -5,7 +5,6 @@ import Layout from './layout/Main';
 import { GlobalContext } from './context/GlobalContext';
 import Locations from './components/Locations/Locations';
 import Vehicles from './components/Vehicles/Vehicles';
-import RouteMap from './components/RouteMap/RouteMap';
 import { fetchNodes, fetchVehicles, fetchShippingStatuses } from './utils/apiCalls';
 
 import VehicleShippings from './components/VehicleShippings/VehicleShippings';
@@ -43,7 +42,6 @@ const App = () => {
             <Route exact path='/' component={Locations} />
             <Route path='/vehicles' component={Vehicles} />
             <Route path='/shippings/:licensePlate' component={VehicleShippings} />
-            <Route path='/route/:routeId' component={RouteMap} />
             <Route path='/routecalculation' component={RouteCalculation} />
           </>
         )

@@ -3,18 +3,21 @@ import { DropdownItem, DropdownMenu, UncontrolledDropdown, Form, DropdownToggle,
 import { GlobalContext } from '../../context/GlobalContext';
 import { fetchShortestRoute } from '../../utils/apiCalls';
 
+import './RouteCalculation.css';
+import Map from '../Map/Map';
+
 const RouteCalculation = () => {
   const { nodes, nodesAsObject } = useContext(GlobalContext);
   const [origin, setOrigin] = useState(null);
   const [shortestRoute, setShortestRoute] = useState(null);
+  const [shortestRouteNodes, setShortestRouteNodes] = useState(null);
   const [destinationsDraft, setDestinationsDraft] = useState([]);
 
   const extendedSetOrigin = useCallback(
     (id) => {
       setOrigin(id);
-      const idIndex = destinationsDraft.indexOf(id);
-      if (idIndex > -1) removeFromDraft(id);
-    }, [],
+      if (destinationsDraft.indexOf(id) > -1) removeFromDraft(id);
+    }, [destinationsDraft],
   );
 
   const appendToDraft = useCallback(
@@ -25,7 +28,7 @@ const RouteCalculation = () => {
     (id) => {  setDestinationsDraft(draft => [...draft.filter(d => d !== id)]); }, [],
   );
 
-  return !!nodes ? (
+  return !!nodes && !!nodesAsObject ? (
     <>
       <Form>
         <UncontrolledDropdown>
@@ -73,11 +76,15 @@ const RouteCalculation = () => {
           )
         }
         <Button
+          color="primary"
           onClick={( ) => {
             fetchShortestRoute({
               OriginNodeId: origin,
-              DestinationNodeIds: destinationsDraft
-            }).then(data => setShortestRoute(data))
+              DestinationNodeIds: destinationsDraft.filter(id => id != origin)
+            }).then(data => {
+              setShortestRoute(data);
+              setShortestRouteNodes(data.nodeIds.map(node => nodesAsObject[node]));
+            })
           }}
           disabled={destinationsDraft.length < 3}
         >
@@ -93,6 +100,14 @@ const RouteCalculation = () => {
               Distancia total: {shortestRoute.distance}
             </p>
           </div>
+        )
+      }
+      {
+        !!shortestRouteNodes && (
+          <Map
+            nodes={shortestRouteNodes}
+            route={true}
+          />
         )
       }
     </>

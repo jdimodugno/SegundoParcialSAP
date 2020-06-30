@@ -6,8 +6,6 @@ import moment from 'moment';
 import './VehicleShippings.css';
 import Map from '../Map/Map';
 
-import { castStringToColor } from '../../helpers/miscHelpers';
-
 const VehicleShippings = ({
   match
 }) => {

@@ -14,7 +14,7 @@ const Vehicles = () => {
   const [currentShippings, setCurrentShippings] = useState(null)
   
   useEffect(() => {
-    if (vehicles) {
+    if (vehicles && nodesAsObject) {
       fetchCurrentShippings()
         .then((data) => {
           setCurrentShippings(
@@ -35,7 +35,7 @@ const Vehicles = () => {
           );
         })
     }
-  }, [vehicles]);
+  }, [vehicles, nodesAsObject]);
 
   return vehicles ? (
     <>
