@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using LogisticsDomain;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogisticsCore.Data

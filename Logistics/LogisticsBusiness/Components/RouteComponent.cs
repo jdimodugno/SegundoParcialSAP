@@ -11,6 +11,8 @@ namespace LogisticsBusiness.Components
     {
         public RouteComponent() : base(new RouteRepository()) { }
 
+        public Route GetById(Guid Id) => ((RouteRepository)_repository).GetById(Id);
+
         public Route GetShortestRoute(Guid originNode, Guid[] possibleDestinations)
         {
             List<List<Guid>> DestinationsCombinatory = GenerateCombinatory(originNode, possibleDestinations);

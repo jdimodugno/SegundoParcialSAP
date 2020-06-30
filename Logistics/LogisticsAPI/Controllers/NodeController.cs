@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LogisticsAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/locations")]
     [ApiController]
     public class NodeController : GenericController<Node, NodeComponent>
     {

@@ -62,5 +62,10 @@ namespace LogisticsCore.Data
 
             return Routes.Aggregate((r1, r2) => r1.Distance < r2.Distance ? r1 : r2);
         }
+
+        public Route GetById(Guid Id) => _entity
+            .Where(r => r.Id == Id)
+            .Include(r => r.RouteNodes)
+            .First();
     }
 }
