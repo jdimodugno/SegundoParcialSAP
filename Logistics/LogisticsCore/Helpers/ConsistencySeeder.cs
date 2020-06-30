@@ -552,25 +552,25 @@ namespace LogisticsCore.Helpers
 
             TransportationVehicle Scania1 = new TransportationVehicle()
             {
-                LicensePlate = "SCANIA_1",
+                LicensePlate = "ALPHA_1",
                 Year = 2000,
                 Model = "Scania G 410"
             };
             TransportationVehicle Scania2 = new TransportationVehicle()
             {
-                LicensePlate = "SCANIA_2",
+                LicensePlate = "BETA_2",
                 Year = 2010,
                 Model = "Scania P 320"
             };
             TransportationVehicle Scania3 = new TransportationVehicle()
             {
-                LicensePlate = "SCANIA_3",
+                LicensePlate = "GAMMA_3",
                 Year = 2015,
                 Model = "Scania R 450"
             };
             TransportationVehicle Scania4 = new TransportationVehicle()
             {
-                LicensePlate = "SCANIA_4",
+                LicensePlate = "EPSILON_4",
                 Year = 2017,
                 Model = "Scania R 620"
             };
@@ -592,7 +592,8 @@ namespace LogisticsCore.Helpers
                 GenerateCombinatory(Neuquen.Id, new Guid[] { Formosa.Id, Cordoba.Id, Mendoza.Id, LaRioja.Id }),
                 GenerateCombinatory(LaRioja.Id, new Guid[] { CABA.Id, Cordoba.Id, Neuquen.Id, Corrientes.Id, LaPlata.Id }),
                 GenerateCombinatory(Mendoza.Id, new Guid[] { Formosa.Id, Cordoba.Id, LaPlata.Id }),
-                GenerateCombinatory(Corrientes.Id, new Guid[] { Cordoba.Id, LaPlata.Id, Mendoza.Id, CABA.Id })
+                GenerateCombinatory(Corrientes.Id, new Guid[] { Cordoba.Id, LaPlata.Id, Mendoza.Id, CABA.Id }),
+                GenerateCombinatory(Corrientes.Id, new Guid[] { LaPlata.Id, Mendoza.Id, CABA.Id })
             };
 
             List<Route> routes = new List<Route>();
@@ -660,8 +661,8 @@ namespace LogisticsCore.Helpers
             Random rnd = new Random();
             for (int i = 0; i < 40; i++)
             {
-                Route route = routes[rnd.Next(routes.Count)];
                 int vehicleIndex = (int)Math.Floor((double)(i / 10));
+                Route route = routes[rnd.Next(0, 2) + (2 * vehicleIndex)];
                 bool shouldBeInProgress = i % 9 == 0 && vehicleIndex != 3;
                 bool shouldBeScheduled = i % 10 == 0 && vehicleIndex != 3;
 

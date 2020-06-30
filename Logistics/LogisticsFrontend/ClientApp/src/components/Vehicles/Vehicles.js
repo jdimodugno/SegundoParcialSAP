@@ -1,14 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalContext'
 import { Table, Spinner, Badge } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { castStringToColor } from '../../helpers/miscHelpers';
 import '../../Global.css';
 import './Vehicles.css';
+import ColorIndicator from '../ColorIndicator/ColorIndicator';
+import Map from '../Map/Map';
+import { fetchCurrentShippings } from '../../utils/apiCalls';
 
 const Vehicles = () => {
-  const { vehicles } = useContext(GlobalContext);
+  const { vehicles, nodesAsObject } = useContext(GlobalContext);
+  const [currentShippings, setCurrentShippings] = useState(null)
+  
+  useEffect(() => {
+    if (vehicles) {
+      fetchCurrentShippings()
+        .then((data) => {
+          setCurrentShippings(
+            data.map(
+              ({ transportationVehicleLicensePlate, currentSegment, route: { detail, routeNodes }}) => {
+                const originNode = nodesAsObject[currentSegment.originId];
+                const destinationNode = nodesAsObject[currentSegment.destinationId];
+                return ({
+                  nodes: routeNodes
+                    .sort((a, b) => a.order - b.order)
+                    .map(({ nodeId, order }) => ({ ...nodesAsObject[nodeId], order })),
+                  segment: [originNode, destinationNode],
+                  color: castStringToColor(transportationVehicleLicensePlate),
+                  label: `Vehículo: ${transportationVehicleLicensePlate} | Ruta ${detail}`
+                });
+              }
+            )
+          );
+        })
+    }
+  }, [vehicles]);
 
-  return (
+  return vehicles ? (
     <>
       <Table hover>
         <thead>
@@ -17,6 +46,7 @@ const Vehicles = () => {
             <th>Modelo</th>
             <th>Año</th>
             <th>Estado</th>
+            <th>Indicador</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -34,6 +64,9 @@ const Vehicles = () => {
                     </Badge>
                   </td>
                   <td>
+                    <ColorIndicator backgroundColor={castStringToColor(licensePlate)} />
+                  </td>
+                  <td>
                     <Link to={`/shippings/${licensePlate}`}>
                       <Badge color="primary">Ver Viajes</Badge>
                     </Link>
@@ -49,11 +82,15 @@ const Vehicles = () => {
         </tbody>
       </Table>
       {
-        !vehicles && (
-          <Spinner type="grow" color="primary" /> 
-        ) 
+        !!currentShippings && (
+          <Map
+            routes={currentShippings}
+          />
+        )
       }
     </>
+  ) : (
+    <Spinner type="grow" color="primary" /> 
   );
 }
  

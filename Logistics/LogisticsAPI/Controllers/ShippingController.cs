@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using LogisticsAPI.Helpers;
 using LogisticsBusiness.Components;
 using LogisticsDomain;
@@ -16,6 +17,10 @@ namespace LogisticsAPI.Controllers
         [HttpGet]
         [Route("statuses")]
         public JsonResult GetShippingStatuses() => new JsonResult(EnumHelper<ShippingStatus>.ToJson());
+
+        [HttpGet]
+        [Route("inprogress")]
+        public List<Shipping> GetByLicensePlate() => ((ShippingComponent)_component).GetInProgressShippings();
 
         [HttpGet("{Id}")]
         public Shipping GetByLicensePlate(Guid Id) => ((ShippingComponent)_component).GetById(Id);

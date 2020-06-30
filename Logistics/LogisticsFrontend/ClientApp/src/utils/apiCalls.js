@@ -29,3 +29,8 @@ export const fetchShortestRoute = async (payload) => {
   const res = await axios.post(`${process.env.REACT_APP_API_URL}/routes/calculate`, payload);
   return res.data;
 }
+
+export const fetchCurrentShippings = async () => {
+  const res = await axios.get(`${process.env.REACT_APP_API_URL}/shippings/inprogress`);
+  return res.data;
+}

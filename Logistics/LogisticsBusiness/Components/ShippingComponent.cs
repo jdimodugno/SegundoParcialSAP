@@ -12,5 +12,7 @@ namespace LogisticsBusiness.Components
         public List<Shipping> GetAll() => ((ShippingRepository)_repository).GetAll();
 
         public Shipping GetById(Guid Id) => ((ShippingRepository)_repository).GetById(Id);
+
+        public List<Shipping> GetInProgressShippings() => ((ShippingRepository)_repository).GetInProgressShippings();
     }
 }

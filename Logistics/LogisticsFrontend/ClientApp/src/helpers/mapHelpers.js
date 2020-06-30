@@ -13,9 +13,11 @@ const nodeToFeature = ({ latitude, longitude }) => ({
   }
 });
 
-const nodesToFeature = (nodes) => ({
+const nodesToFeature = (nodes, label) => ({
   type: 'Feature',
-  properties: {},
+  properties: {
+    label,
+  },
   geometry: {
     type: 'LineString',
     coordinates: nodes.map(({ longitude, latitude }) => ([
@@ -25,13 +27,13 @@ const nodesToFeature = (nodes) => ({
   }
 })
 
-export const generateGeoJson = (nodes, { route, markers}) => {
+export const generateGeoJson = (nodes, { route, markers, label = null }) => {
   let geoJSON = {
     type: 'FeatureCollection',
     features: []
   };
 
-  if (route) geoJSON.features = [...(geoJSON.features), nodesToFeature(nodes)];
+  if (route) geoJSON.features = [...(geoJSON.features), nodesToFeature(nodes, label)];
 
   if (markers) {
     geoJSON.features = [
@@ -43,9 +45,7 @@ export const generateGeoJson = (nodes, { route, markers}) => {
   return geoJSON;
 };
 
-export const generateLayer = (nodes, route, segment, map) => {
-  if (!nodes || !map || !window.google) return null;
-  
+const fitMapBounds = (nodes, map) => {
   const latSet = Array.from(new Set(nodes.map(node=> node.latitude)));
   const lngSet = Array.from(new Set(nodes.map(node=> node.longitude)));
 
@@ -58,11 +58,19 @@ export const generateLayer = (nodes, route, segment, map) => {
     new window.google.maps.LatLng(minLat, minLng),
     new window.google.maps.LatLng(maxLat, maxLng),
   );
+  map.fitBounds(bounds);
+}
+
+export const generateLayer = (nodes, segment, map, options) => {
+  if (!nodes || !map || !window.google) return null;
+  
+  const { color, route, fit, label } = options;
 
   let segmentLayer = null;
   // initialize style
   const mainLayer = new window.google.maps.Data({ 
-    style: { 
+    style: {
+      strokeColor: color,
       strokeWeight: 5,
       zIndex: 10,
       icon: RedPin,
@@ -71,20 +79,20 @@ export const generateLayer = (nodes, route, segment, map) => {
   });
 
 
-  const mainLayerGeoJSON = generateGeoJson(nodes, { route, markers: true });
+  const mainLayerGeoJSON = generateGeoJson(nodes, { route, markers: true, label});
   mainLayer.addGeoJson(mainLayerGeoJSON);
   mainLayer.setMap(map);
 
   if (segment) {
     segmentLayer = new window.google.maps.Data({ 
       style: { 
-        strokeColor: '#AAEEBB',
-        strokeWeight: 3,
+        strokeColor: '#ffffff',
+        strokeWeight: 2,
         zIndex: 11,
         visible: true 
       } 
     });
-    const segmentLayerGeoJSON = generateGeoJson(segment, { route, markers: false });
+    const segmentLayerGeoJSON = generateGeoJson(segment, { route, markers: false, label });
     segmentLayer.addGeoJson(segmentLayerGeoJSON);
     segmentLayer.setMap(map);
   }
@@ -98,11 +106,29 @@ export const generateLayer = (nodes, route, segment, map) => {
     map,
   })
 
+  const infoWindow = new window.google.maps.InfoWindow({
+    content: label,
+  });
+
+  mainLayer.addListener('click', () => {
+    infoWindow.open(map, originMarker);
+  }); 
+
   mainLayer.unbind = () => { mainLayer.setMap(null) };
   originMarker.unbind = () => { originMarker.setMap(null) };
-  if (segmentLayer) segmentLayer.unbind = () => { segmentLayer.setMap(null) };
 
-  map.fitBounds(bounds);
+  if (segmentLayer) segmentLayer.unbind = () => { segmentLayer.setMap(null) };
+  if (fit) fitMapBounds(nodes, map);
 
   return [originMarker, mainLayer, segmentLayer];
 };
+
+export const generateMultipleLayer = (routes, map) => {
+  let nodes = [];
+  routes.map(r => {
+    nodes = [...nodes, ...r.nodes];
+    generateLayer(r.nodes, r.segment, map, { route: true, color: r.color, fit: false, label: r.label })
+  });
+
+  fitMapBounds(nodes, map);
+}
