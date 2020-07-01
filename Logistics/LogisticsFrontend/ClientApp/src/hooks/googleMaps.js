@@ -7,7 +7,7 @@ const defaultLibraries = ['geometry', 'visualization', 'places'];
  * @param {string[]} libraries
  * @param {boolean} interactive
  */
-const getUrl = (apiKey = 'AIzaSyBfNftg9upKxF7B1PEriOOYCVkjzBEkkDI', libraries) => {
+const getUrl = (apiKey = 'API_KEY', libraries) => {
   const baseMapUrl = 'https://maps.googleapis.com/maps/api';
   const librariesParam = libraries.length ? `&libraries=${libraries}` : '';
   return `${baseMapUrl}/js?key=${apiKey}${librariesParam}`;
@@ -15,4 +15,4 @@ const getUrl = (apiKey = 'AIzaSyBfNftg9upKxF7B1PEriOOYCVkjzBEkkDI', libraries) =
 
 export const useGoogleMaps = (apiKey, libraries) => useScript(getUrl(apiKey, libraries));
 
-export default () => useGoogleMaps('AIzaSyBfNftg9upKxF7B1PEriOOYCVkjzBEkkDI', defaultLibraries);
+export default () => useGoogleMaps('API_KEY', defaultLibraries);
