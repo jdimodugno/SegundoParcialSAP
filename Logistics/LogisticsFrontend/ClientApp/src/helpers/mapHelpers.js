@@ -38,7 +38,7 @@ export const generateGeoJson = (nodes, { route, markers, label = null }) => {
   if (markers) {
     geoJSON.features = [
       ...(geoJSON.features),
-      ...(nodes.slice((route ? 1 : 0), nodes.length - 1).map(node => nodeToFeature(node)))
+      ...(nodes.slice((route ? 1 : 0), nodes.length).map(node => nodeToFeature(node)))
     ]
   }
 
@@ -102,7 +102,7 @@ export const generateLayer = (nodes, segment, map, options) => {
   const originMarker = new window.google.maps.Marker({
     position: { lat: latitude, lng: longitude },
     icon: BluePin,
-    zIndex: 10,
+    zIndex: route ? 11 : 10,
     map,
   })
 
